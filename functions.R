@@ -2,6 +2,24 @@ removeP5andP7FromNames <- function(x) {
   str_remove_all(x, pattern = "P[57]")
 }
 
+returnAllValidCombinations <- function(p5.names,
+                                       p7.names) {
+  
+  super.set <- createSuperSet(p5.names,
+                              p7.names)
+  
+  all.combinations <- returnCombinations(super.set)
+  
+  reference.set <- list(P5 = p5.names,
+                        P7 = p7.names)
+  
+  out <- 
+    removeNonPresentPairs(all.combinations,
+                          reference.set)
+  
+  out %>% filter(toleave == TRUE) %>% select(-toleave)
+}
+
 createSuperSet <- function(x, y) {
   union(x, y)
 }
@@ -34,23 +52,4 @@ removeNonPresentPairs <- function(pairs.table,
                                   reference.set) {
   pairs.table %>% 
     mutate(toleave = validatePair(V1, V2, reference.set = reference.set))
-}
-
-
-returnAllValidCombinations <- function(p5.names,
-                                       p7.names) {
-  
-  super.set <- createSuperSet(p5.names,
-                              p7.names)
-  
-  all.combinations <- returnCombinations(super.set)
-  
-  reference.set <- list(P5 = p5.names,
-                        P7 = p7.names)
-  
-  out <- 
-    removeNonPresentPairs(all.combinations,
-                          reference.set)
-  
-  out %>% filter(toleave == TRUE) %>% select(-toleave)
 }
