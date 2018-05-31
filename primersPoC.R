@@ -12,4 +12,4 @@ p7 <- read_tsv(file = "data/data_base/P7_in.csv")
 p5.names <- removeP5andP7FromNames((p5$Name))
 p7.names <- removeP5andP7FromNames(unlist(p7$Name))
 
-returnAllValidCombinations(p5.names, p7.names)
+returnNValidCombinations(p5.names, p7.names)

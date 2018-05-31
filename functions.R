@@ -2,6 +2,23 @@ removeP5andP7FromNames <- function(x) {
   str_remove_all(x, pattern = "P[57]")
 }
 
+#' Title
+#'
+#' @param p5.names vector of strings - p5 available
+#' @param p7.names vector of strings - p7 available
+#' @param n number of combinations to return
+#'
+#' @return
+#' @export
+#'
+#' @examples
+returnNValidCombinations <- function(p5.names,
+                                     p7.names,
+                                     n = 60) {
+  returnAllValidCombinations(p5.names,
+                             p7.names) %>% slice(1:n)
+}
+
 returnAllValidCombinations <- function(p5.names,
                                        p7.names) {
   
